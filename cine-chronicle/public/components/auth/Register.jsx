@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Alert, Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form, Row } from 'react-bootstrap'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export function Register () {
   const [formData, setFormData] = useState({
@@ -8,70 +9,88 @@ export function Register () {
     email: '',
     password: ''
   })
+  const [error, setError] = useState('')
 
-  const [message, setMessage] = useState(null)
-  const { username, email, password } = formData
+  const navigate = useNavigate()
 
-  const onChange = (e) => setFormData({
-    ...formData,
-    [e.target.name]: e.target.value
-  })
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const res = await axios.post('http://localhost:5000/api/users/register', formData)
-      setMessage({
-        type: 'success',
-        text: res.data.message
-      })
-    } catch (err) {
-      setMessage({ type: 'danger', text: err.response.data.msg })
+      console.log(res.data)
+      navigate('/login')
+    } catch (error) {
+      console.error(error.response.data) // Muestra el mensaje de error del servidor
+      if (error.response && error.response.data) {
+        setError(error.response.data.msg)
+      } else {
+        setError('Error signing up')
+      }
     }
   }
 
   return (
-    <Container>
-      <h2>Register</h2>
-      {message && <Alert variant={message.type}>{message.text}</Alert>}
-      <Form onSubmit={onSubmit}>
-        <Form.Group controlId='formUsername'>
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type='text'
-            name='username'
-            value={username}
-            onChange={onChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formEmail'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type='email'
-            name='email'
-            value={email}
-            onChange={onChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-            required
-          />
-        </Form.Group>
-
-        <Button variant='primary' type='submit'>Register</Button>
-      </Form>
+    <Container fluid className='auth-container'>
+      <Row className='justify-content-center align-items-center'>
+        <div className='auth-form'>
+          <h2>Sign Up</h2>
+          {error && <Alert variant='danger'>{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId='formBasicUsername'>
+              <Form.Control
+                type='text'
+                placeholder='Username'
+                name='username'
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId='formBasicEmail'>
+              <Form.Control
+                type='email'
+                placeholder='Email address'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId='formBasicPassword'>
+              <Form.Control
+                type='password'
+                placeholder='Password'
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button variant='primary' type='submit' className='btn-signup'>
+              Sign Up
+            </Button>
+            <NavLink to='/login' className='btn-login'>
+              Login
+            </NavLink>
+          </Form>
+          <div className='auth-footer'>
+            <p>Follow us:</p>
+            <div className='social-icons'>
+              <a href='#'>Facebook</a>
+              <a href='#'>Twitter</a>
+              <a href='#'>Instagram</a>
+            </div>
+          </div>
+        </div>
+      </Row>
     </Container>
   )
 }
-
 export default Register

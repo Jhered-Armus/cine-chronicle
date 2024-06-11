@@ -1,0 +1,64 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+  }
+  
+  .auth-form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 400px;
+    width: 100%;
+  }
+  
+  .auth-form h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .auth-form .form-control {
+    margin-bottom: 15px;
+  }
+  
+  .auth-form .btn-login,
+  .auth-form .btn-signup {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 25px;
+  }
+  
+  .auth-form .btn-signup {
+    background-color: #6772e5;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+  }
+  
+  .auth-footer {
+    margin-top: 20px;
+  }
+  
+  .auth-footer p {
+    margin-bottom: 10px;
+  }
+  
+  .auth-footer .social-icons a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #6772e5;
+    font-weight: bold;
+  }
