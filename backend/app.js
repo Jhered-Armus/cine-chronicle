@@ -13,6 +13,9 @@ app.use(express.json());
 
 //Rutas
 app.use('/api/users', require('./src/routes/UserRoutes'));
+app.use('/api/reviews', require('./src/routes/ReviewRoutes'));
+app.use('/api/auth', require('./src/routes/AuthRoutes')); 
+app.use('/api', require('./src/routes/LibraryRoutes'));
 
 // Ruta raíz
 app.get('/', (req, res) => {

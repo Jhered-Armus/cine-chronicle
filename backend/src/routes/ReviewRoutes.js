@@ -1,30 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Review = require('../models/Review')
+const { saveOrUpdateReview, getReview } = require('../controllers/ReviewControlles');
 
-//obtener reseñas
-router.get('/', async (req, res) => {
-    try {
-        const reviews = await Review.find();
-        res.json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: error });
-    }
-});
+// Ruta para crear o actualizar una reseña
+router.post('/', saveOrUpdateReview);
 
-//crear una reseña
-router.post('/', async (req, res) => {
-    const review = new Review({
-        title: req.body.title,
-        body: req.body.body,
-        rating: req.body.rating
-    });
-    try {
-        const savedReview = await review.save();
-        res.status(201).json(savedReview);
-    } catch (error) {
-        res.status(400).json({ message: error });
-    }
-});
+// Ruta para obtener una reseña
+router.get('/:userId/:itemId/:episode', getReview);
 
 module.exports = router;
