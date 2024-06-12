@@ -5,6 +5,7 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -18,19 +19,21 @@ const AuthProvider = ({ children }) => {
           setUser(res.data)
         } catch (err) {
           console.error(err)
-          // Si la solicitud a la API de autenticación falla,
-          // debes establecer el estado de user en null y eliminar el token de autenticación
           setUser(null)
           // eslint-disable-next-line no-undef
           sessionStorage.removeItem('token')
+        } finally {
+          setLoading(false)
         }
+      } else {
+        setLoading(false)
       }
     }
     fetchUser()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}>
       {children}
     </AuthContext.Provider>
   )

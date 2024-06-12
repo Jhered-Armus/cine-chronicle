@@ -19,9 +19,9 @@ export function MovieDetails () {
   const [currentPart, setCurrentPart] = useState(0)
   const [loading, setLoading] = useState(true)
   const [showReviewModal, setShowReviewModal] = useState(false)
+  const [showLibraryModal, setShowLibraryModal] = useState(false)
   const [reviewTitle, setReviewTitle] = useState('')
   const [reviewEpisode, setReviewEpisode] = useState(null)
-  const [showLibraryModal, setShowLibraryModal] = useState(false) // Estado para el modal de biblioteca
   const PART_SIZE = 12
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export function MovieDetails () {
               r: 'json'
             }
           })
-          setRelatedItems(relatedItemsResponse.data.Search.filter((item) => item.imdbID !== id))
+          setRelatedItems(relatedItemsResponse.data.Search.filter(item => item.imdbID !== id))
         } else {
           setRelatedItems([])
         }
@@ -176,7 +176,7 @@ export function MovieDetails () {
                       </Card.Text>
                       {user && (
                         <Button variant='primary' onClick={openLibraryModal}>
-                          Añadir a mi biblioteca
+                          Añadir a Mi Biblioteca
                         </Button>
                       )}
                     </Card.Body>
@@ -192,20 +192,22 @@ export function MovieDetails () {
             <h2 className='section-title text-center mb-3'>Películas o Series Relacionadas</h2>
             <Row xs={2} md={4} lg={6} className='g-4'>
               {relatedItems.length > 0
-                ? relatedItems.map((item) => (
-                  <Col key={item.imdbID}>
-                    <Card>
-                      <Card.Img
-                        variant='top'
-                        src={item.Poster}
-                        style={{ height: '305px', objectFit: 'cover' }}
-                      />
-                      <Card.Body>
-                        <Card.Title>{item.Title}</Card.Title>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))
+                ? (
+                    relatedItems.map((item) => (
+                      <Col key={item.imdbID}>
+                        <Card>
+                          <Card.Img
+                            variant='top'
+                            src={item.Poster}
+                            style={{ height: '305px', objectFit: 'cover' }}
+                          />
+                          <Card.Body>
+                            <Card.Title>{item.Title}</Card.Title>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))
+                  )
                 : (
                   <Col>
                     <p className='text-center text-muted'>No hay series o películas relacionadas.</p>
@@ -252,7 +254,9 @@ export function MovieDetails () {
                               Reseña
                             </Button>
                           </Card.Header>
-                          <Card.Body>Contenido del Capítulo {episode}</Card.Body>
+                          <Card.Body>
+                            Contenido del Capítulo {episode}
+                          </Card.Body>
                         </Card>
                       </Col>
                     ))}
@@ -273,7 +277,9 @@ export function MovieDetails () {
                           Reseña
                         </Button>
                       </Card.Header>
-                      <Card.Body>Contenido del Capítulo 1</Card.Body>
+                      <Card.Body>
+                        Contenido del Capítulo 1
+                      </Card.Body>
                     </Card>
                   </Col>
                 </Row>
@@ -303,5 +309,5 @@ export function MovieDetails () {
       <Footer />
     </>
   )
-}
+};
 export default MovieDetails
