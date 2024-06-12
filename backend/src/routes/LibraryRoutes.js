@@ -1,9 +1,9 @@
 // routes/libraryRoutes.js
 const express = require('express');
 const router = express.Router();
-const libraryController = require('../controllers/LibraryController');
+const {addOrUpdateLibrary, getLibraryByUser} = require('../controllers/LibraryController');
 
-router.post('/library', libraryController.addOrUpdateLibrary);
-router.get('/library/:userId', libraryController.getLibraryByUser);
+router.post('/library', addOrUpdateLibrary);
+router.get('/library/:userId', getLibraryByUser);
 
 module.exports = router;
