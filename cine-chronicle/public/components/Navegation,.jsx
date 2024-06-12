@@ -4,6 +4,7 @@ import { AuthContext } from './auth/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa'
 import { formatUsername } from '../utils/format'
+import SearchBar from './SearchBar'
 
 const NavigationBar = () => {
   const { user, setUser } = useContext(AuthContext)
@@ -35,6 +36,8 @@ const NavigationBar = () => {
                   </Dropdown.Menu>
                 </Dropdown>
                 <Nav.Link href='/library'>Mi Biblioteca</Nav.Link>
+                {/* Buscador */}
+                <SearchBar />
               </>
               )
             : (
@@ -48,5 +51,4 @@ const NavigationBar = () => {
     </Navbar>
   )
 }
-
 export default NavigationBar
