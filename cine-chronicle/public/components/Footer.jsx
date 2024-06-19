@@ -1,13 +1,27 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
-const Footer = () => {
+export function Footer () {
   return (
-    <footer className='bg-dark text-white mt-5 p-4 text-center'>
+    <footer style={{ background: '#0e3143' }} className='text-white mt-5 p-4 text-center'>
       <Container>
         <Row>
           <Col>
-            <p>&copy; {new Date().getFullYear()} Movie Catalog. All Rights Reserved.</p>
+            <p>
+              {new Date().getFullYear()} Movie Catalog. Built with{' '}
+              <a href='https://reactjs.org/' target='_blank' rel='noreferrer'>
+                React
+              </a>{' '}
+              and{' '}
+              <a href='https://getbootstrap.com/' target='_blank' rel='noreferrer'>
+                Bootstrap
+              </a>
+              . Data provided by{' '}
+              <a href='http://www.omdbapi.com/' target='_blank' rel='noreferrer'>
+                OMDB API
+              </a>
+              .
+            </p>
           </Col>
         </Row>
       </Container>

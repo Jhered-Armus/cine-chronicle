@@ -40,13 +40,13 @@ export function Register () {
     <Container fluid className='auth-container'>
       <Row className='justify-content-center align-items-center'>
         <div className='auth-form'>
-          <h2>Sign Up</h2>
+          <h2>Registro</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='formBasicUsername'>
               <Form.Control
                 type='text'
-                placeholder='Username'
+                placeholder='Nombre de Usuario'
                 name='username'
                 value={formData.username}
                 onChange={handleChange}
@@ -56,7 +56,7 @@ export function Register () {
             <Form.Group controlId='formBasicEmail'>
               <Form.Control
                 type='email'
-                placeholder='Email address'
+                placeholder='Correo Electronico'
                 name='email'
                 value={formData.email}
                 onChange={handleChange}
@@ -66,7 +66,7 @@ export function Register () {
             <Form.Group controlId='formBasicPassword'>
               <Form.Control
                 type='password'
-                placeholder='Password'
+                placeholder='Contraseña'
                 name='password'
                 value={formData.password}
                 onChange={handleChange}
@@ -74,10 +74,10 @@ export function Register () {
               />
             </Form.Group>
             <Button variant='primary' type='submit' className='btn-signup'>
-              Sign Up
+              Registrase
             </Button>
             <NavLink to='/login' className='btn-login'>
-              Login
+              Iniciar Sesion
             </NavLink>
           </Form>
           <div className='auth-footer'>

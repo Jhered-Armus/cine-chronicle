@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { Badge, Button, ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { key } from '../../utils/format'
 import Footer from '../Footer'
 import NavigationBar from '../Navegation,'
@@ -23,6 +23,8 @@ export function MovieDetails () {
   const [reviewTitle, setReviewTitle] = useState('')
   const [reviewEpisode, setReviewEpisode] = useState(null)
   const PART_SIZE = 12
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -131,24 +133,28 @@ export function MovieDetails () {
     setShowLibraryModal(false)
   }
 
+  const handleCardClick = (id) => {
+    navigate(`/details/${id}`)
+  }
+
   return (
     <>
       <NavigationBar />
-      <Container fluid>
-        <Container className='bg-dark mt-3 rounded-2'>
+      <Container fluid className='py-5'>
+        <Container className='text-white rounded-3' style={{ backgroundColor: '#1d556d', padding: '1rem' }}>
           {details && (
             <div className='featured-section mb-5'>
-              <Row className=''>
-                <Col className='d-flex justify-content-center' md={5}>
+              <Row className='g-0'>
+                <Col md={5}>
                   <img
                     src={details.Poster}
                     alt={details.Title}
-                    className='img-fluid m-3 rounded-3'
+                    className='img-fluid rounded-3'
                     style={{ height: '405px', objectFit: 'cover' }}
                   />
                 </Col>
-                <Col className='d-flex justify-content-lg-center' md={5}>
-                  <Card className='m-3'>
+                <Col md={7}>
+                  <Card className='h-100'>
                     <Card.Body>
                       <Card.Title>{details.Title}</Card.Title>
                       <Card.Subtitle className='mb-2 text-muted'>
@@ -175,7 +181,7 @@ export function MovieDetails () {
                         <strong>Plot:</strong> {details.Plot}
                       </Card.Text>
                       {user && (
-                        <Button variant='primary' onClick={openLibraryModal}>
+                        <Button variant='primary' onClick={openLibraryModal} style={{ background: '#1389b6' }}>
                           Añadir a Mi Biblioteca
                         </Button>
                       )}
@@ -187,39 +193,55 @@ export function MovieDetails () {
           )}
         </Container>
 
-        <Container className='bg-dark mt-3 rounded-2'>
-          <div className='featured-section mb-5'>
-            <h2 className='section-title text-center mb-3'>Películas o Series Relacionadas</h2>
-            <Row xs={2} md={4} lg={6} className='g-4'>
-              {relatedItems.length > 0
-                ? (
-                    relatedItems.map((item) => (
-                      <Col key={item.imdbID}>
-                        <Card>
-                          <Card.Img
-                            variant='top'
-                            src={item.Poster}
-                            style={{ height: '305px', objectFit: 'cover' }}
-                          />
-                          <Card.Body>
-                            <Card.Title>{item.Title}</Card.Title>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    ))
-                  )
-                : (
-                  <Col>
-                    <p className='text-center text-muted'>No hay series o películas relacionadas.</p>
-                  </Col>
-                  )}
-            </Row>
+        <Container className='mt-3 rounded-2 p-4' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
+          <div style={{ paddingLeft: '40px', backgroundColor: 'rgba(0, 0, 0, 0.6' }}>
+            <h2 className='section-title text-white text-center mb-3'>Películas o Series Relacionadas</h2>
           </div>
+          <Row className='d-flex flex-wrap p-0'>
+            {relatedItems.length > 0
+              ? (
+                  relatedItems.map((item) => (
+                    <Col key={item.imdbID} xs={6} md={4} lg={2} className='mb-4'>
+                      <div
+                        className='d-flex flex-column justify-content-end'
+                        style={{
+                          width: '100%',
+                          height: '306px',
+                          cursor: 'pointer',
+                          backgroundImage: `url(${item.Poster})`,
+                          backgroundSize: 'cover',
+                          border: '4px solid white',
+                          borderRadius: '4px'
+                        }}
+                        onClick={() => handleCardClick(item.imdbID)}
+                      >
+                        <div
+                          className='text-center text-white'
+                          style={{
+                            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                            padding: '5px',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                          }}
+                        >
+                          {item.Title}
+                        </div>
+                      </div>
+                    </Col>
+                  ))
+                )
+              : (
+                <Col>
+                  <p className='text-center text-muted'>No hay series o películas relacionadas.</p>
+                </Col>
+                )}
+          </Row>
         </Container>
 
-        <Container className='bg-dark mt-3 rounded-2'>
+        <Container className=' mt-3 pb-2 rounded-3' style={{ backgroundColor: '#1d556d' }}>
           <div className='featured-section mb-5'>
-            <h2 className='section-title text-center mb-3'>Capítulos o Episodios</h2>
+            <h2 className='section-title text-center mb-3 text-white'>Capítulos o Episodios</h2>
             {episodesCount > 1
               ? (
                 <>
@@ -243,12 +265,12 @@ export function MovieDetails () {
                   <Row xs={1} md={2} lg={3} className='g-4'>
                     {parts[currentPart].map((episode) => (
                       <Col key={episode}>
-                        <Card>
+                        <Card className='h-100'>
                           <Card.Header>
                             Capítulo {episode}
                             <Button
                               variant='link'
-                              className='float-end p-0'
+                              className='float-end p-0 text-white'
                               onClick={() => openReviewModal(`Capítulo ${episode}`, episode)}
                             >
                               Reseña
@@ -271,7 +293,7 @@ export function MovieDetails () {
                         Capítulo 1
                         <Button
                           variant='link'
-                          className='float-end p-0'
+                          className='float-end p-0 text-white'
                           onClick={() => openReviewModal('Capítulo 1', 1)}
                         >
                           Reseña

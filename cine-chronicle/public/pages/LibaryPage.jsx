@@ -1,4 +1,4 @@
-import { Alert, Badge, Button, ButtonGroup, Card, Col, Container, Nav, Row, Tab } from 'react-bootstrap'
+import { Alert, Badge, Button, ButtonGroup, Col, Container, Nav, Row, Tab } from 'react-bootstrap'
 import Footer from '../components/Footer'
 import NavigationBar from '../components/Navegation,'
 import LoadingComponent from '../components/Loading'
@@ -93,13 +93,15 @@ export function LibraryPage () {
   return (
     <>
       <NavigationBar />
-      <Container fluid className='mt-3'>
+      <Container fluid className='d-flex flex-column mt-4' style={{ minHeight: 'calc(100vh - 130px)' }}>
         <Tab.Container defaultActiveKey='Todos'>
           <Row>
             <Col sm={3}>
               <Nav variant='pills' className='flex-column'>
                 {statuses.map(status => (
-                  <Nav.Item key={status}>
+                  <Nav.Item
+                    key={status}
+                  >
                     <Nav.Link eventKey={status}>{status}</Nav.Link>
                   </Nav.Item>
                 ))}
@@ -117,25 +119,45 @@ export function LibraryPage () {
                         )
                       : (
                         <>
-                          <Row xs={1} md={2} lg={3} className='g-4'>
-                            {paginateEntries(filterEntriesByStatus(status)).map(entry => (
-                              <Col key={entry.itemId}>
-                                <Card onClick={() => handleCardClick(entry.itemId)} style={{ cursor: 'pointer' }}>
-                                  <Card.Img
-                                    variant='top'
-                                    src={entry.itemDetails.Poster}
-                                    style={{ height: '305px', objectFit: 'cover' }}
-                                  />
-                                  <Card.Body>
-                                    <Card.Title>{entry.itemDetails.Title}</Card.Title>
-                                    <Badge pill bg='secondary' className='mx-1'>
-                                      {entry.status}
-                                    </Badge>
-                                  </Card.Body>
-                                </Card>
-                              </Col>
-                            ))}
-                          </Row>
+                          <Container className='mt-3 rounded-2 p-2' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
+                            <Row className='d-flex flex-wrap p-0'>
+                              {paginateEntries(filterEntriesByStatus(status)).map(entry => (
+                                <Col key={entry.itemId} xs={6} md={4} lg={3} className='mb-4'>
+                                  <div
+                                    className='d-flex flex-column justify-content-end position-relative'
+                                    style={{
+                                      width: '100%',
+                                      height: '306px',
+                                      cursor: 'pointer',
+                                      backgroundImage: `url(${entry.itemDetails.Poster})`,
+                                      backgroundSize: 'cover',
+                                      border: '4px solid white',
+                                      borderRadius: '4px'
+                                    }}
+                                    onClick={() => handleCardClick(entry.itemId)}
+                                  >
+                                    <div className='position-absolute top-0 start-0 m-2'>
+                                      <Badge pill bg='secondary' className='mx-1'>
+                                        {entry.status}
+                                      </Badge>
+                                    </div>
+                                    <div
+                                      className='text-center text-white'
+                                      style={{
+                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                        padding: '5px',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap'
+                                      }}
+                                    >
+                                      {entry.itemDetails.Title}
+                                    </div>
+                                  </div>
+                                </Col>
+                              ))}
+                            </Row>
+                          </Container>
                           <ButtonGroup className='mt-3'>
                             <Button variant='secondary' onClick={handlePreviousPage} disabled={currentPage === 0}>
                               &laquo; Anterior
@@ -161,6 +183,7 @@ export function LibraryPage () {
             </Col>
           </Row>
         </Tab.Container>
+        <div style={{ flexGrow: 1 }} />
       </Container>
       <Footer />
     </>

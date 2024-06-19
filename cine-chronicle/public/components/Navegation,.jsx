@@ -18,34 +18,25 @@ const NavigationBar = () => {
   }
 
   return (
-    <Navbar bg='dark' variant='dark' expand='lg'>
-      <Navbar.Brand href='/catalog'>Movie Catalog</Navbar.Brand>
+    <Navbar style={{ background: '#0e3143' }} variant='dark' expand='lg'>
+      <Navbar.Brand href='/catalog'>Cine Chronicle</Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
-          {user
-            ? (
-              <>
-                <Dropdown>
-                  <Dropdown.Toggle variant='dark' id='dropdown-basic'>
-                    <FaUser style={{ marginRight: '8px' }} />
-                    {formatUsername(user.username)}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Nav.Link href='/library'>Mi Biblioteca</Nav.Link>
-                {/* Buscador */}
-                <SearchBar />
-              </>
-              )
-            : (
-              <>
-                <Nav.Link href='/login'>Login</Nav.Link>
-                <Nav.Link href='/register'>Sign Up</Nav.Link>
-              </>
-              )}
+          <>
+            <Dropdown>
+              <Dropdown.Toggle style={{ background: '#1389b6' }} id='dropdown-basic'>
+                <FaUser style={{ marginRight: '8px' }} />
+                {formatUsername(user.username)}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={handleLogout}>Cerrar sesion</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Nav.Link href='/library'>Mi Biblioteca</Nav.Link>
+            {/* Buscador */}
+            <SearchBar />
+          </>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

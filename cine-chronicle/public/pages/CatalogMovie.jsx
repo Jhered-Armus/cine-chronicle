@@ -132,7 +132,7 @@ export function CatalogMovie () {
       <NavigationBar />
       <Container fluid>
         {/* Primera sección: Película/Serie destacada y carrusel */}
-        <Container className='bg-dark mt-3 rounded-2'>
+        <Container className='mt-3 rounded-2' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
           {featuredItem && (
             <div className='featured-section mb-5'>
               <Row className=''>
@@ -167,68 +167,99 @@ export function CatalogMovie () {
                   </Card>
                 </Col>
               </Row>
-              <Slider {...settings} className='mt-4'>
-                {combinedList.map((item) => (
-                  <div key={item.imdbID} className='carousel-item'>
-                    <img
-                      src={item.Poster} alt={item.Title} className='img-fluid'
-                      style={{ height: '305px', objectFit: 'cover', margin: '0 10px' }}
-                      onClick={() => handleCardClick(item.imdbID)}
-                    />
-                  </div>
-                ))}
-              </Slider>
+              <Container className='pb-4'>
+                <Slider {...settings} className='mt-4 ' style={{ background: 'rgb(95, 113, 123, 0.2)' }}>
+                  {combinedList.map((item) => (
+                    <div key={item.imdbID} className='carousel-item'>
+                      <img
+                        src={item.Poster} alt={item.Title} className='img-fluid'
+                        style={{ height: '305px', width: '205px', objectFit: 'cover', margin: '10px' }}
+                        onClick={() => handleCardClick(item.imdbID)}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </Container>
             </div>
           )}
         </Container>
 
         {/* Segunda sección: Películas */}
-        <div className='bg-dark rounded-top-4' style={{ paddingLeft: '40px' }}>
-          <h2 className='section-title'>Películas</h2>
-        </div>
-        <Row>
-          {movies.map((movie) => (
-            <Col key={movie.imdbID} xs={6} md={4} lg={2} className='mb-4'>
-              <Card onClick={() => handleCardClick(movie.imdbID)}>
-                <Card.Img variant='top' src={movie.Poster} style={{ height: '305px', objectFit: 'cover' }} />
-                <Card.Body>
-                  <Card.Title
+        <Container className='mt-3 rounded-2 p-4' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
+          <div className='rounded-top-4' style={{ paddingLeft: '40px', background: '#144d66' }}>
+            <h2 className='section-title'>Películas</h2>
+          </div>
+          <Row className='d-flex flex-wrap p-0'>
+            {movies.map((movie, index) => (
+              <Col key={movie.imdbID} xs={6} md={4} lg={2} className='mb-4 '>
+                <div
+                  className='d-flex flex-column justify-content-end'
+                  style={{
+                    width: '100%',
+                    height: '306px',
+                    cursor: 'pointer',
+                    backgroundImage: `url(${movie.Poster})`,
+                    backgroundSize: 'cover',
+                    border: '4px solid white',
+                    borderRadius: '4px'
+                  }}
+                  onClick={() => handleCardClick(movie.imdbID)}
+                >
+                  <div
+                    className='text-center text-white'
                     style={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                      padding: '5px',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap'
-                    }} className='card-title'
-                  >{movie.Title}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-
+                    }}
+                  >
+                    {movie.Title}
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
         {/* Tercera sección: Series */}
-        <div className='bg-dark rounded-top-4' style={{ paddingLeft: '40px' }}>
-          <h2 className='section-title'>Series</h2>
-        </div>
-        <Row>
-          {series.map((serie) => (
-            <Col key={serie.imdbID} xs={6} md={4} lg={2} className='mb-4'>
-              <Card onClick={() => handleCardClick(serie.imdbID)}>
-                <Card.Img variant='top' src={serie.Poster} style={{ height: '305px', objectFit: 'cover' }} />
-                <Card.Body>
-                  <Card.Title
+        <Container className='mt-3 rounded-2 p-4' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
+          <div className='rounded-top-4' style={{ paddingLeft: '40px', background: '#144d66' }}>
+            <h2 className='section-title'>Películas</h2>
+          </div>
+          <Row className='d-flex flex-wrap p-0'>
+            {series.map((serie, index) => (
+              <Col key={serie.imdbID} xs={6} md={4} lg={2} className='mb-4 '>
+                <div
+                  className='d-flex flex-column justify-content-end'
+                  style={{
+                    width: '100%',
+                    height: '306px',
+                    cursor: 'pointer',
+                    backgroundImage: `url(${serie.Poster})`,
+                    backgroundSize: 'cover',
+                    border: '4px solid white',
+                    borderRadius: '4px'
+                  }}
+                  onClick={() => handleCardClick(serie.imdbID)}
+                >
+                  <div
+                    className='text-center text-white'
                     style={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                      padding: '5px',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap'
-                    }} className='card-title'
-                  >{serie.Title}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+                    }}
+                  >
+                    {serie.Title}
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </Container>
       <Footer />
     </>
