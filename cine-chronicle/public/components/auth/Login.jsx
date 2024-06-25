@@ -35,7 +35,7 @@ export function Login () {
       if (error.response && error.response.data) {
         setError(error.response.data.msg)
       } else {
-        setError('Error logging in')
+        setError('Error en iniciar sesion')
       }
     }
   }

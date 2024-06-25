@@ -47,7 +47,17 @@ export function LibraryPage () {
   }
 
   if (!user) {
-    return <p>Debe iniciar sesión para ver su biblioteca.</p>
+    return (
+      <>
+        <NavigationBar />
+        <Container className='d-flex flex-column justify-content-center align-items-center vh-100'>
+          <h1 className='text-white'>No has iniciado sesión</h1>
+          <p className='text-white'>Inicia sesion para poder acceder al contendio</p>
+          <Button href='/login' style={{ background: '#1389b6' }}>Iniciar Sesion</Button>
+        </Container>
+        <Footer />
+      </>
+    )
   }
 
   if (loadingLibrary) {
@@ -101,8 +111,9 @@ export function LibraryPage () {
                 {statuses.map(status => (
                   <Nav.Item
                     key={status}
+                    className='mb-2'
                   >
-                    <Nav.Link eventKey={status}>{status}</Nav.Link>
+                    <Nav.Link className='text-white' style={{ }} eventKey={status}>{status}</Nav.Link>
                   </Nav.Item>
                 ))}
               </Nav>

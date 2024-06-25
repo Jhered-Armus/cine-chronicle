@@ -23,20 +23,29 @@ const NavigationBar = () => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
-          <>
-            <Dropdown>
-              <Dropdown.Toggle style={{ background: '#1389b6' }} id='dropdown-basic'>
-                <FaUser style={{ marginRight: '8px' }} />
-                {formatUsername(user.username)}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={handleLogout}>Cerrar sesion</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Nav.Link href='/library'>Mi Biblioteca</Nav.Link>
-            {/* Buscador */}
-            <SearchBar />
-          </>
+          {user == null
+            ? (
+              <>
+                <Nav.Link href='/login'>Iniciar Sesion</Nav.Link>
+                <Nav.Link href='/register'>Registrarse</Nav.Link>
+              </>
+              )
+            : (
+              <>
+                <Dropdown>
+                  <Dropdown.Toggle style={{ background: '#1389b6' }} id='dropdown-basic'>
+                    <FaUser style={{ marginRight: '8px' }} />
+                    {formatUsername(user.username)}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={handleLogout}>Cerrar sesion</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Nav.Link href='/library'>Mi Biblioteca</Nav.Link>
+                {/* Buscador */}
+                <SearchBar />
+              </>
+              )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
