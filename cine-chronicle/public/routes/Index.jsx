@@ -9,6 +9,7 @@ import PrivateRoute from '../components/PrivateRoutes'
 import MovieDetails from '../components/MovieAndSeries/MovieDetails'
 import { LibraryPage } from '../pages/LibaryPage'
 import { SearchPage } from '../pages/SearchPage'
+import NotFound from '../components/NotFoundPage'
 // import NavigationBar from '../components/Navegation,'
 
 export function RoutesPages () {
@@ -18,11 +19,12 @@ export function RoutesPages () {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/catalog' element={<PrivateRoute><CatalogMovie /></PrivateRoute>} />
-        <Route path='/login/*' element={<PublicRoute restricted><Login /></PublicRoute>} />
-        <Route path='/register/*' element={<PublicRoute restricted><Register /></PublicRoute>} />
+        <Route path='/login' element={<PublicRoute restricted><Login /></PublicRoute>} />
+        <Route path='/register' element={<PublicRoute restricted><Register /></PublicRoute>} />
         <Route path='/details/:id' element={<PrivateRoute><MovieDetails /></PrivateRoute>} />
         <Route path='/library' element={<LibraryPage />} />
         <Route path='/search' element={<SearchPage />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

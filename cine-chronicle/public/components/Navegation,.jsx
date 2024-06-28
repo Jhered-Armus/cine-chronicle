@@ -14,7 +14,7 @@ const NavigationBar = () => {
     // eslint-disable-next-line no-undef
     sessionStorage.removeItem('token')
     setUser(null)
-    navigate('/login')
+    navigate('/')
   }
 
   return (

@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { Alert, Button, Container, Form, Row } from 'react-bootstrap'
+import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
-import '../../pages/styles/Auth.css'
+// import '../../pages/styles/Auth.css'
 import { AuthContext } from './AuthContext'
+import NavigationBar from '../Navegation,'
+import Footer from '../Footer'
 
 export function Login () {
   const [formData, setFormData] = useState({
@@ -41,20 +43,22 @@ export function Login () {
   }
 
   return (
-    <Container fluid className='auth-container'>
-      <Row className='justify-content-center align-items-center'>
-        <div className='auth-form'>
-          <h2>Bienvendio!</h2>
+    <div className='d-flex flex-column vh-100' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
+      <NavigationBar />
+      <Container className='flex-grow-1 d-flex flex-column justify-content-center align-items-center'>
+        <div className='p-5 rounded-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', width: '100%', maxWidth: '400px' }}>
+          <h2 className='text-center text-white mb-4'>Bienvenido!</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='formBasicEmail'>
               <Form.Control
                 type='email'
-                placeholder='Correo electronico...'
+                placeholder='Correo electrónico...'
                 name='email'
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className='mb-3'
               />
             </Form.Group>
             <Form.Group controlId='formBasicPassword'>
@@ -65,26 +69,22 @@ export function Login () {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                className='mb-3'
               />
             </Form.Group>
-            <Button variant='primary' type='submit' className='btn-login'>
-              Iniciar
-            </Button>
-            <NavLink to='/register' className='btn-signup'>
-              Registrarse
-            </NavLink>
-          </Form>
-          <div className='auth-footer'>
-            <p>Follow us:</p>
-            <div className='social-icons'>
-              <a href='#'>Facebook</a>
-              <a href='#'>Twitter</a>
-              <a href='#'>Instagram</a>
+            <div className='d-flex justify-content-between align-items-center'>
+              <Button style={{ background: '#1389b6', border: 'none' }} type='submit' className='btn-login'>
+                Iniciar
+              </Button>
+              <NavLink to='/register' className='btn-signup ml-3' style={{ color: '#aae9f7' }}>
+                Registrarse
+              </NavLink>
             </div>
-          </div>
+          </Form>
         </div>
-      </Row>
-    </Container>
+      </Container>
+      <Footer />
+    </div>
   )
 };
 

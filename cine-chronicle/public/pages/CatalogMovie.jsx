@@ -187,7 +187,7 @@ export function CatalogMovie () {
         {/* Segunda sección: Películas */}
         <Container className='mt-3 rounded-2 p-4' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
           <div className='rounded-top-4' style={{ paddingLeft: '40px', background: '#144d66' }}>
-            <h2 className='section-title'>Películas</h2>
+            <h2 className='section-title text-white'>Películas</h2>
           </div>
           <Row className='d-flex flex-wrap p-0'>
             {movies.map((movie, index) => (
@@ -225,7 +225,7 @@ export function CatalogMovie () {
         {/* Tercera sección: Series */}
         <Container className='mt-3 rounded-2 p-4' style={{ background: 'linear-gradient(-45deg, #3e454c 20%, #125c7a 80%)' }}>
           <div className='rounded-top-4' style={{ paddingLeft: '40px', background: '#144d66' }}>
-            <h2 className='section-title'>Películas</h2>
+            <h2 className='section-title  text-white'>Series</h2>
           </div>
           <Row className='d-flex flex-wrap p-0'>
             {series.map((serie, index) => (

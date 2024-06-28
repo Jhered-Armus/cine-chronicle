@@ -48,15 +48,15 @@ export function LibraryPage () {
 
   if (!user) {
     return (
-      <>
+      <div className='d-flex flex-column vh-100'>
         <NavigationBar />
-        <Container className='d-flex flex-column justify-content-center align-items-center vh-100'>
+        <Container className='flex-grow-1 d-flex flex-column justify-content-center align-items-center '>
           <h1 className='text-white'>No has iniciado sesión</h1>
           <p className='text-white'>Inicia sesion para poder acceder al contendio</p>
           <Button href='/login' style={{ background: '#1389b6' }}>Iniciar Sesion</Button>
         </Container>
         <Footer />
-      </>
+      </div>
     )
   }
 
