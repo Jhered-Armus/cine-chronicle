@@ -44,7 +44,7 @@ const getReview = async (req, res) => {
     const userReview = await UserReview.findOne({ userId });
 
     if (!userReview) {
-      console.log('No user review found for userId:', userId);
+      console.log('No se encontró ninguna reseña de usuario para userId:', userId);
       return res.status(404).json({ message: 'Reseña no encontrada' });
     }
 
@@ -53,14 +53,14 @@ const getReview = async (req, res) => {
     );
 
     if (!review) {
-      console.log('No review found for itemId:', itemId, 'and episode:', episode);
+      console.log('No se encontró ninguna reseña para itemId:', itemId, 'y episodio:', episode);
       return res.status(404).json({ message: 'Reseña no encontrada' });
     }
 
-    console.log('Review found:', review);
+    console.log('Reseña no encontrada:', review);
     res.json(review);
   } catch (error) {
-    console.error('Error fetching review:', error);
+    console.error('Error al obtener la resaña:', error);
     res.status(500).json({ message: error.message });
   }
 };

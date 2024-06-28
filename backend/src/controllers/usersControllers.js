@@ -7,7 +7,7 @@ exports.register = async (req, res) => {
     try {
       let user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: 'User already exists' });
+        return res.status(400).json({ msg: 'El usuario ya existe' });
       }
       user = new User({
         username,
@@ -26,16 +26,16 @@ exports.login = async (req, res) => {
     try {
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ msg: 'Invalid credentials' });
+        return res.status(400).json({ msg: 'Credenciales no válidas' });
       }
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid credentials' });
+        return res.status(400).json({ msg: 'Credenciales no válidas' });
       }
       const payload = {
         user: {
           id: user.id,
-          username: user.username, // Asegúrate de incluir el nombre de usuario en el token
+          username: user.username, // incluir el nombre de usuario en el token
         },
       };
       jwt.sign(

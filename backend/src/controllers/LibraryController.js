@@ -28,8 +28,8 @@ exports.addOrUpdateLibrary = async (req, res) => {
     await library.save();
     res.status(200).json(library);
   } catch (error) {
-    console.error('Error updating library:', error);
-    res.status(500).json({ message: 'Error updating library' });
+    console.error('Error al actualizar la biblioteca: ', error);
+    res.status(500).json({ message: 'Error al actualizar la biblioteca' });
   }
 };
 
@@ -40,12 +40,12 @@ exports.getLibraryByUser = async (req, res) => {
     const library = await Library.findOne({ userId });
 
     if (!library) {
-      return res.status(404).json({ message: 'No library found for this user' });
+      return res.status(404).json({ message: 'No se encontró ninguna biblioteca para esta usuario.' });
     }
 
     res.status(200).json(library);
   } catch (error) {
-    console.error('Error fetching library:', error);
-    res.status(500).json({ message: 'Error fetching library' });
+    console.error('Error al recuperar la biblioteca:', error);
+    res.status(500).json({ message: 'Error al recuperar la biblioteca' });
   }
 };
