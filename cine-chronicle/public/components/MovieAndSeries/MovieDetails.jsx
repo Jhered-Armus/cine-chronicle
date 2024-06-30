@@ -29,7 +29,7 @@ export function MovieDetails () {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
           params: {
             i: id,
             apikey: env.apiKey,
@@ -43,7 +43,7 @@ export function MovieDetails () {
           let totalEpisodes = 0
 
           for (let season = 1; season <= seasons; season++) {
-            const seasonResponse = await axios.get('http://www.omdbapi.com/', {
+            const seasonResponse = await axios.get('https://www.omdbapi.com/', {
               params: {
                 i: id,
                 Season: season,
@@ -58,7 +58,7 @@ export function MovieDetails () {
           setEpisodesCount(1)
         }
 
-        const relatedResponse = await axios.get('http://www.omdbapi.com/', {
+        const relatedResponse = await axios.get('https://www.omdbapi.com/', {
           params: {
             i: id,
             apikey: env.apiKey,
@@ -68,7 +68,7 @@ export function MovieDetails () {
 
         if (relatedResponse.data.Type === 'movie' || relatedResponse.data.Type === 'series') {
           const relatedTitle = relatedResponse.data.Title
-          const relatedItemsResponse = await axios.get('http://www.omdbapi.com/', {
+          const relatedItemsResponse = await axios.get('https://www.omdbapi.com/', {
             params: {
               s: relatedTitle,
               apikey: env.apiKey,
