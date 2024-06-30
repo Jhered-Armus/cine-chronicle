@@ -1,6 +1,7 @@
 [build]
-  command = "npm run build"
+  base = "cine-chronicle"
   publish = "dist"
+  command = "npm run build"
 
 [[redirects]]
   from = "/*"
