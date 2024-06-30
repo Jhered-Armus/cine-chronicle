@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { Alert, Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 // import '../../pages/styles/Auth.css'
 import { AuthContext } from './AuthContext'
@@ -16,6 +16,7 @@ export function Login () {
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const { setUser } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -26,6 +27,7 @@ export function Login () {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     try {
       const res = await axios.post(`${env.backendUrl}/api/users/login`, formData)
       // Almacenar el token de autenticación en sessionStorage en lugar de localStorage
@@ -40,6 +42,8 @@ export function Login () {
       } else {
         setError('Error en iniciar sesion')
       }
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -74,8 +78,13 @@ export function Login () {
               />
             </Form.Group>
             <div className='d-flex justify-content-between align-items-center'>
-              <Button style={{ background: '#1389b6', border: 'none' }} type='submit' className='btn-login'>
-                Iniciar
+              <Button
+                style={{ background: '#1389b6', border: 'none' }}
+                type='submit'
+                className='btn-login'
+                disabled={loading}
+              >
+                {loading ? <Spinner animation='border' size='sm' /> : 'Iniciar'}
               </Button>
               <NavLink to='/register' className='btn-signup ml-3' style={{ color: '#aae9f7' }}>
                 Registrarse
@@ -87,6 +96,5 @@ export function Login () {
       <Footer />
     </div>
   )
-};
-
+}
 export default Login

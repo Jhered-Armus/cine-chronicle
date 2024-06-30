@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Alert, Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import NavigationBar from '../Navegation,'
 import Footer from '../Footer'
@@ -13,6 +13,7 @@ export function Register () {
     password: ''
   })
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -25,8 +26,9 @@ export function Register () {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     try {
-      const res = await axios.post(`${env.backendUrl}/users/register`, formData)
+      const res = await axios.post(`${env.backendUrl}/api/users/register`, formData)
       console.log(res.data)
       navigate('/login')
     } catch (error) {
@@ -36,6 +38,8 @@ export function Register () {
       } else {
         setError('Error al registrarse')
       }
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -81,8 +85,13 @@ export function Register () {
               />
             </Form.Group>
             <div className='d-flex justify-content-between align-items-center'>
-              <Button style={{ background: '#1389b6', border: 'none' }} type='submit' className='btn-signup'>
-                Registrarse
+              <Button
+                style={{ background: '#1389b6', border: 'none' }}
+                type='submit'
+                className='btn-signup'
+                disabled={loading}
+              >
+                {loading ? <Spinner animation='border' size='sm' /> : 'Registrarse'}
               </Button>
               <NavLink to='/login' className='btn-login ml-3' style={{ color: '#aae9f7' }}>
                 Iniciar sesión
