@@ -17,7 +17,7 @@ export function Footer () {
                 Bootstrap
               </a>
               . Data provided by{' '}
-              <a href='http://www.omdbapi.com/' target='_blank' rel='noreferrer'>
+              <a href='https://www.omdbapi.com/' target='_blank' rel='noreferrer'>
                 OMDB API
               </a>
               . See the code on {' '}

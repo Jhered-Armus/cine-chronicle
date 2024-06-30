@@ -17,7 +17,7 @@ export function SearchPage () {
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
           params: {
             s: query,
             apikey: env.apiKey,

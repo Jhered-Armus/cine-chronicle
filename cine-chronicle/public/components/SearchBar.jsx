@@ -14,7 +14,7 @@ export function SearchBar () {
     event.preventDefault()
     if (searchQuery.trim() !== '') {
       try {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
           params: {
             s: searchQuery,
             apikey: env.apiKey,
@@ -33,7 +33,7 @@ export function SearchBar () {
     setSearchQuery(event.target.value)
     if (event.target.value.trim() !== '') {
       try {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
           params: {
             s: event.target.value,
             apikey: env.apiKey,

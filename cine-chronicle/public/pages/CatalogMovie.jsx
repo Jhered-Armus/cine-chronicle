@@ -21,7 +21,7 @@ export function CatalogMovie () {
 
   useEffect(() => {
     const fetchDetails = async (imdbID) => {
-      const response = await axios.get('http://www.omdbapi.com/', {
+      const response = await axios.get('https://www.omdbapi.com/', {
         params: {
           i: imdbID,
           apikey: env.apiKey,
@@ -34,7 +34,7 @@ export function CatalogMovie () {
     const fetchData = async () => {
       try {
         const fetchMovies = async (page) => {
-          const response = await axios.get('http://www.omdbapi.com/', {
+          const response = await axios.get('https://www.omdbapi.com/', {
             params: {
               s: 'movie',
               apikey: env.apiKey,
@@ -47,7 +47,7 @@ export function CatalogMovie () {
         }
 
         const fetchSeries = async (page) => {
-          const response = await axios.get('http://www.omdbapi.com/', {
+          const response = await axios.get('https://www.omdbapi.com/', {
             params: {
               s: 'series',
               apikey: env.apiKey,

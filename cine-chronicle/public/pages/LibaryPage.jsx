@@ -25,7 +25,7 @@ export function LibraryPage () {
         const response = await axios.get(`${env.backendUrl}/api/library/${user._id}`)
         const libraryEntries = await Promise.all(
           response.data.entries.map(async (entry) => {
-            const itemResponse = await axios.get(`http://www.omdbapi.com/?i=${entry.itemId}&apikey=${env.apiKey}`)
+            const itemResponse = await axios.get(`https://www.omdbapi.com/?i=${entry.itemId}&apikey=${env.apiKey}`)
             return { ...entry, itemDetails: itemResponse.data }
           })
         )
