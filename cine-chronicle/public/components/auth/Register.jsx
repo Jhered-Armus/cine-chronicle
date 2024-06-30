@@ -4,6 +4,7 @@ import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import NavigationBar from '../Navegation,'
 import Footer from '../Footer'
+import env from '../../utils/configEnv'
 
 export function Register () {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ export function Register () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/users/register', formData)
+      const res = await axios.post(`${env.backendUrl}/users/register`, formData)
       console.log(res.data)
       navigate('/login')
     } catch (error) {

@@ -5,8 +5,8 @@ import LoadingComponent from '../components/Loading'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../components/auth/AuthContext'
-import { key } from '../utils/format'
 import { useNavigate } from 'react-router-dom'
+import env from '../utils/configEnv'
 
 const ITEMS_PER_PAGE = 10
 
@@ -22,10 +22,10 @@ export function LibraryPage () {
       if (!user) return
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/library/${user._id}`)
+        const response = await axios.get(`${env.backendUrl}/api/library/${user._id}`)
         const libraryEntries = await Promise.all(
           response.data.entries.map(async (entry) => {
-            const itemResponse = await axios.get(`http://www.omdbapi.com/?i=${entry.itemId}&apikey=${key}`)
+            const itemResponse = await axios.get(`http://www.omdbapi.com/?i=${entry.itemId}&apikey=${env.apiKey}`)
             return { ...entry, itemDetails: itemResponse.data }
           })
         )

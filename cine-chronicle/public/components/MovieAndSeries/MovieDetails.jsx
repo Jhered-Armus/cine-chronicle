@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { Badge, Button, ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import { key } from '../../utils/format'
 import Footer from '../Footer'
 import NavigationBar from '../Navegation,'
 import LoadingComponent from '../Loading'
 import { ReviewModal } from './ReviewModal'
 import { AuthContext } from '../auth/AuthContext'
 import { LibraryModal } from './LibraryModal'
+import env from '../../utils/configEnv'
 
 export function MovieDetails () {
   const { id } = useParams()
@@ -32,7 +32,7 @@ export function MovieDetails () {
         const response = await axios.get('http://www.omdbapi.com/', {
           params: {
             i: id,
-            apikey: key,
+            apikey: env.apiKey,
             r: 'json'
           }
         })
@@ -47,7 +47,7 @@ export function MovieDetails () {
               params: {
                 i: id,
                 Season: season,
-                apikey: key,
+                apikey: env.apiKey,
                 r: 'json'
               }
             })
@@ -61,7 +61,7 @@ export function MovieDetails () {
         const relatedResponse = await axios.get('http://www.omdbapi.com/', {
           params: {
             i: id,
-            apikey: key,
+            apikey: env.apiKey,
             r: 'json'
           }
         })
@@ -71,7 +71,7 @@ export function MovieDetails () {
           const relatedItemsResponse = await axios.get('http://www.omdbapi.com/', {
             params: {
               s: relatedTitle,
-              apikey: key,
+              apikey: env.apiKey,
               r: 'json'
             }
           })
@@ -233,7 +233,7 @@ export function MovieDetails () {
                 )
               : (
                 <Col>
-                  <p className='text-center text-muted'>No hay series o películas relacionadas.</p>
+                  <p className='text-center text-white'>No hay series o películas relacionadas.</p>
                 </Col>
                 )}
           </Row>
@@ -269,8 +269,8 @@ export function MovieDetails () {
                           <Card.Header>
                             Capítulo {episode}
                             <Button
-                              variant='link'
-                              className='float-end p-0 text-white'
+                              variant='info'
+                              className='float-end p-1 text-white'
                               onClick={() => openReviewModal(`Capítulo ${episode}`, episode)}
                             >
                               Reseña
@@ -292,8 +292,8 @@ export function MovieDetails () {
                       <Card.Header>
                         Capítulo 1
                         <Button
-                          variant='link'
-                          className='float-end p-0 text-white'
+                          variant='info'
+                          className='float-end p-1 text-white'
                           onClick={() => openReviewModal('Capítulo 1', 1)}
                         >
                           Reseña

@@ -5,8 +5,9 @@ import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
 import Footer from '../components/Footer'
 import axios from 'axios'
 import Slider from 'react-slick'
-import { formatUsername, key } from '../utils/format'
+import { formatUsername } from '../utils/format'
 import LoadingComponent from '../components/Loading'
+import env from '../utils/configEnv'
 
 export function CatalogMovie () {
   const [featuredItem, setFeaturedItem] = useState(null)
@@ -23,7 +24,7 @@ export function CatalogMovie () {
       const response = await axios.get('http://www.omdbapi.com/', {
         params: {
           i: imdbID,
-          apikey: key,
+          apikey: env.apiKey,
           r: 'json'
         }
       })
@@ -36,7 +37,7 @@ export function CatalogMovie () {
           const response = await axios.get('http://www.omdbapi.com/', {
             params: {
               s: 'movie',
-              apikey: key,
+              apikey: env.apiKey,
               type: 'movie',
               r: 'json',
               page
@@ -49,7 +50,7 @@ export function CatalogMovie () {
           const response = await axios.get('http://www.omdbapi.com/', {
             params: {
               s: 'series',
-              apikey: key,
+              apikey: env.apiKey,
               type: 'series',
               r: 'json',
               page
@@ -76,7 +77,7 @@ export function CatalogMovie () {
         setCombinedList(combinedList)
         setFeaturedItem(combinedList[0])
       } catch (error) {
-        console.error('Error fetching data:', error)
+        console.error('Error al obtener datos:', error)
       } finally {
         setLoading(false)
       }

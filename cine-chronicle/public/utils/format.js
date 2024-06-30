@@ -5,5 +5,3 @@ const formatUsername = (username) => {
 }
 
 export { formatUsername }
-
-export const key = '196ff2bd'

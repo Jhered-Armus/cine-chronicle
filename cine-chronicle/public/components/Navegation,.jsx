@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa'
 import { formatUsername } from '../utils/format'
 import SearchBar from './SearchBar'
+import logo from '../assets/logo_horizontal.png'
 
 const NavigationBar = () => {
   const { user, setUser } = useContext(AuthContext)
@@ -19,7 +20,14 @@ const NavigationBar = () => {
 
   return (
     <Navbar style={{ background: '#0e3143' }} variant='dark' expand='lg'>
-      <Navbar.Brand href='/catalog'>Cine Chronicle</Navbar.Brand>
+      <Navbar.Brand href='/catalog'>
+        <img
+          src={logo} alt='logo'
+          width='170'
+          height='30'
+          className='d-inline-block align-top'
+        />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>

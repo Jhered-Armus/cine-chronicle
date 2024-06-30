@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import env from '../../utils/configEnv'
 
 export function LibraryModal ({ show, handleClose, userId, itemId }) {
   const [status, setStatus] = useState('')
@@ -10,7 +11,7 @@ export function LibraryModal ({ show, handleClose, userId, itemId }) {
       // Fetch the library entry for the given userId and itemId
       const fetchLibraryEntry = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/library/${userId}`)
+          const response = await axios.get(`${env.backendUrl}/api/library/${userId}`)
           const library = response.data
           const entry = library.entries.find(entry => entry.itemId === itemId)
           if (entry) {
@@ -29,7 +30,7 @@ export function LibraryModal ({ show, handleClose, userId, itemId }) {
 
   const handleSave = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/library', {
+      const response = await axios.post(`${env.backendUrl}/api/library`, {
         userId,
         itemId,
         status

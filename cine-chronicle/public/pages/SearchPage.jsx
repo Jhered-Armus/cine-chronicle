@@ -4,8 +4,8 @@ import LoadingComponent from '../components/Loading'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { key } from '../utils/format'
 import Footer from '../components/Footer'
+import env from '../utils/configEnv'
 
 export function SearchPage () {
   const location = useLocation()
@@ -20,13 +20,13 @@ export function SearchPage () {
         const response = await axios.get('http://www.omdbapi.com/', {
           params: {
             s: query,
-            apikey: key,
+            apikey: env.apiKey,
             r: 'json'
           }
         })
         setResults(response.data.Search || [])
       } catch (error) {
-        console.error('Error fetching search results:', error)
+        console.error('Error al obtener resultados de búsqueda:', error)
       } finally {
         setLoading(false)
       }

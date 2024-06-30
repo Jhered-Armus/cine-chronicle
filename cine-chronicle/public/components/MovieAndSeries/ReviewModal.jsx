@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Form, Modal } from 'react-bootstrap'
+import env from '../../utils/configEnv'
 
 export function ReviewModal ({ show, handleClose, title, username, userId, itemId, episode, reviewData }) {
   const initialReviewState = {
@@ -19,7 +20,7 @@ export function ReviewModal ({ show, handleClose, title, username, userId, itemI
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/reviews/${userId}/${itemId}/${episode}`)
+        const response = await axios.get(`${env.backendUrl}/api/reviews/${userId}/${itemId}/${episode}`)
         const reviewData = response.data
         console.log('Fetched review:', reviewData)
 
@@ -64,7 +65,7 @@ export function ReviewModal ({ show, handleClose, title, username, userId, itemI
         ...review
       }
 
-      await axios.post('http://localhost:5000/api/reviews', reviewData)
+      await axios.post(`${env.backendUrl}/api/reviews`, reviewData)
       resetForm()
       handleClose()
     } catch (error) {

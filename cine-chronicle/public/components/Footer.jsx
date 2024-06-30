@@ -20,6 +20,10 @@ export function Footer () {
               <a href='http://www.omdbapi.com/' target='_blank' rel='noreferrer'>
                 OMDB API
               </a>
+              . See the code on {' '}
+              <a href='https://github.com/Jhered-Armus/cine-chronicle' target='_blank' rel='noreferrer'>
+                GitHub
+              </a>
               .
             </p>
           </Col>

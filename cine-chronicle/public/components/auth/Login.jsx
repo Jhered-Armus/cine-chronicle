@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from './AuthContext'
 import NavigationBar from '../Navegation,'
 import Footer from '../Footer'
+import env from '../../utils/configEnv'
 
 export function Login () {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ export function Login () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', formData)
+      const res = await axios.post(`${env.backendUrl}/api/users/login`, formData)
       // Almacenar el token de autenticación en sessionStorage en lugar de localStorage
       // eslint-disable-next-line no-undef
       sessionStorage.setItem('token', res.data.token)

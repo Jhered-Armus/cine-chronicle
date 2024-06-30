@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import env from '../../utils/configEnv'
 
 const AuthContext = createContext()
 
@@ -13,7 +14,7 @@ const AuthProvider = ({ children }) => {
       const token = sessionStorage.getItem('token')
       if (token) {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth', {
+          const res = await axios.get(`${env.backendUrl}/api/auth`, {
             headers: { 'x-auth-token': token }
           })
           setUser(res.data)

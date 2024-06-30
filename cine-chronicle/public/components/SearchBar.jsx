@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { Button, Dropdown, DropdownButton, Form, FormControl } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { key } from '../utils/format'
 import React, { useState } from 'react'
+import env from '../utils/configEnv'
 
 export function SearchBar () {
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,14 +17,14 @@ export function SearchBar () {
         const response = await axios.get('http://www.omdbapi.com/', {
           params: {
             s: searchQuery,
-            apikey: key,
+            apikey: env.apiKey,
             r: 'json'
           }
         })
         setSearchResults(response.data.Search || [])
         setDropdownOpen(true)
       } catch (error) {
-        console.error('Error fetching search results:', error)
+        console.error('Error al obtener resultados de búsqueda:', error)
       }
     }
   }
@@ -36,14 +36,14 @@ export function SearchBar () {
         const response = await axios.get('http://www.omdbapi.com/', {
           params: {
             s: event.target.value,
-            apikey: key,
+            apikey: env.apiKey,
             r: 'json'
           }
         })
         setSearchResults(response.data.Search || [])
         setDropdownOpen(true)
       } catch (error) {
-        console.error('Error fetching search results:', error)
+        console.error('Error al obtener resultados de búsqueda:', error)
       }
     } else {
       setSearchResults([])
