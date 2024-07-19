@@ -55,7 +55,7 @@ export function Home () {
               <Button style={{ background: 'transparent', border: 'white solid 1px' }} className='text-white' href='/register'>Registrarse</Button>
             </>
             )
-          : <Button style={{ background: '#1389b6' }} href='/catalog'>Ir Catalogo</Button>}
+          : <Button style={{ background: '#1389b6' }} href='/catalog'>Ir al Catalogo</Button>}
       </Container>
       <Footer />
     </div>

@@ -90,6 +90,7 @@ export function Login () {
                 Registrarse
               </NavLink>
             </div>
+            {loading ? <h6 className='text-light mt-3'>La primera vez, puede tardar en iniciar</h6> : null}
           </Form>
         </div>
       </Container>

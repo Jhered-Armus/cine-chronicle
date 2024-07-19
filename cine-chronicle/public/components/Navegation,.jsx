@@ -20,7 +20,7 @@ const NavigationBar = () => {
 
   return (
     <Navbar style={{ background: '#0e3143' }} variant='dark' expand='lg'>
-      <Navbar.Brand href='/catalog'>
+      <Navbar.Brand href='/'>
         <img
           src={logo} alt='logo'
           width='170'
