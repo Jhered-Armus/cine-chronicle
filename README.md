@@ -1,6 +1,6 @@
 # Cine Chronicle
 
-Cine Chronicle es una plataforma de catalogación de películas y series que te permite descubrir, guardar y organizar tus títulos favoritos. Ya sea que estés, Cine Chronicle es tu compañero ideal para llevar un registro personalizado de lo que has visto y lo que quieres ver.
+Es una plataforma de catalogación de películas y series diseñada para que los usuarios puedan crear y almacenar sus propias reseñas personales. Ideal para aquellos que desean recordar detalles y acontecimientos clave de cada episodio o película, ofreciendo una forma organizada y accesible de gestionar y consultar sus experiencias de visualización.
 
 ## Características
 
